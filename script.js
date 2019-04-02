@@ -28,6 +28,9 @@ var airtableRecord4Array = [];
 var airtableRecord5Name = "background color";
 var airtableRecord5;
 var airtableRecord5Array = [];
+var airtableRecord6Name = "mins highlighted";
+var airtableRecord6;
+var airtableRecord6Array = [];
 
 /////////////////// variables
 
@@ -42,14 +45,14 @@ var footerRElem = document.getElementById("footerR");
 var next;
 var record4 = document.getElementById("timetable");
 var timetableLoaded = false;
-var minsHighlighted = 5;
 var highlightedColor = "#fff";
 var highlightedBackgroundColor = "#f00";
 
-var devMode = true;
-var roundUpTheMins = true;
-
 var beep = new Audio("beep.wav");
+
+// modes
+var devMode = false;
+var roundUpMins = true;
 
 ///////////////////
 
@@ -73,25 +76,38 @@ function update(){
 
     // calculate time in seconds
     var totalSecondsNow = (HH * 3600) + (MM * 60) + parseInt(SS);
+    var totalSecondsDay = 24 * 3600;
 
-    // get record in airtable according to the present moment
-    var index;
-
-    for(var i = 0; i < airtableRecord2Array.length; i++){
-        if(totalSecondsNow <= airtableRecord2Array[i]){
-            index = i;
-            break;
+    // calculation of the total amount of seconds till the end of the matching record
+    // (assuming that airtableRecord2 is sorted ascendingly)
+    var totalSecondsTillTheEnd;
+    // if the present moment is bigger than the last record
+    if(totalSecondsNow > airtableRecord2Array[airtableRecord2Array.length - 1]){
+        // it means that we are in the first record
+        index = 0;
+        // then, calculate the total amount of seconds taking into account the remaining time from the last record
+        totalSecondsTillTheEnd = (totalSecondsDay - totalSecondsNow) + airtableRecord2Array[index];
+    }else{
+        // search for the record according to the present moment
+        for(var i = 0; i < airtableRecord2Array.length; i++){
+            if(totalSecondsNow <= airtableRecord2Array[i]){
+                index = i;
+                break;
+            }
         }
+        // calculate the total amount of seconds remaining till the end of the record
+        totalSecondsTillTheEnd = airtableRecord2Array[index] - totalSecondsNow;
     }
 
     // calculate countdown
-    var totalSecondsTillTheEnd = airtableRecord2Array[index] - totalSecondsNow;
     var hrsTillTheEnd = parseInt(totalSecondsTillTheEnd / 3600);
     var minsTillTheEnd = parseInt((totalSecondsTillTheEnd % 3600) / 60);
     var secsTillTheEnd = (totalSecondsTillTheEnd % 3600) % 60;
 
     // round up the minutes
-    if (roundUpTheMins && !devMode) { minsTillTheEnd = minsTillTheEnd + 1; }
+    var lastMinute = 0;
+    if(roundUpMins){ lastMinute = 1; }
+    if (roundUpMins && !devMode) { minsTillTheEnd = minsTillTheEnd + lastMinute; }
 
     // format countdown
     var HHTillTheEnd = hrsTillTheEnd;
@@ -104,6 +120,7 @@ function update(){
 
     // display countdown
     record1.textContent = airtableRecord1Array[index];
+    var minsHighlighted = airtableRecord6Array[index];
 
     if(devMode){
         changeColors("#222","#bbb");
@@ -126,7 +143,7 @@ function update(){
 
     // trigger sound
     if(hrsTillTheEnd == 0 && minsTillTheEnd == minsHighlighted && secsTillTheEnd == 59 ||
-        hrsTillTheEnd == 0 && minsTillTheEnd == 0 && secsTillTheEnd <= 2){
+        hrsTillTheEnd == 0 && minsTillTheEnd == lastMinute && secsTillTheEnd <= 2){
         beep.play();
     }
 
@@ -142,7 +159,7 @@ function update(){
     footerLElem.textContent = yy + " " + mm + " " + dd;
     footerRElem.textContent = HH + ":" + MM + ":" + SS;
     
-    if(index < airtableRecord1Array.length){
+    if(index < airtableRecord1Array.length - 1){
         next = airtableRecord1Array[index + 1];
     }else{
         next = airtableRecord1Array[0];
@@ -183,6 +200,8 @@ base(airtableBaseName).select({
         airtableRecord4Array.push(airtableRecord4);
         airtableRecord5 = record.get(airtableRecord5Name);
         airtableRecord5Array.push(airtableRecord5);
+        airtableRecord6 = record.get(airtableRecord6Name);
+        airtableRecord6Array.push(airtableRecord6);
     });
     
     if(!timetableLoaded) { timetable(); }
