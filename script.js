@@ -56,8 +56,8 @@ var roundUpMins = true;
 
 // error message
 if (airtableApiKey == ""){
-    footerElem.textContent = "add the apiKey at the end of the url (..index.html#apiKey)";
-    record1.textContent = "AIRTABLE_API_KEY is missing";
+    footerElem.textContent = "AIRTABLE_API_KEY is missing (..index.html#apiKey)";
+    record1.textContent = "ERROR";
 }
 
 // refresh rate
