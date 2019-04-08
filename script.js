@@ -5,6 +5,8 @@ var airtableApiKey = location.hash.substring(1); //add the apiKey at the end of 
 var airtableBaseKey = "appJiXZgUVkUbDbhY";
 console.log("key: " + airtableApiKey);
 
+var msgApiKey = "add the apiKey at the end of the url (..index.html#apiKey)";
+
 // base
 var airtableBaseName = "timetable2";
 
@@ -54,6 +56,10 @@ var devMode = false;
 var roundUpMins = true;
 
 ///////////////////
+
+if (airtableApiKey == ""){
+    console.log(msgApiKey);
+}
 
 // refresh rate
 setInterval(update, 1000);
