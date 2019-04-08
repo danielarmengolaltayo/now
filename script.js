@@ -3,9 +3,6 @@
 // keys
 var airtableApiKey = location.hash.substring(1); //add the apiKey at the end of the url (..index.html#apiKey)
 var airtableBaseKey = "appJiXZgUVkUbDbhY";
-console.log("key: " + airtableApiKey);
-
-var msgApiKey = "add the apiKey at the end of the url (..index.html#apiKey)";
 
 // base
 var airtableBaseName = "timetable2";
@@ -57,9 +54,10 @@ var roundUpMins = true;
 
 ///////////////////
 
+// error message
 if (airtableApiKey == ""){
-    console.log(msgApiKey);
-    footerElem.textContent = msgApiKey;
+    footerElem.textContent = "add the apiKey at the end of the url (..index.html#apiKey)";
+    record1.textContent = "AIRTABLE_API_KEY is missing";
 }
 
 // refresh rate
@@ -172,8 +170,6 @@ function update(){
     }
 
     footerElem.textContent = "next: " + next;
-
-    
 
 }
 
