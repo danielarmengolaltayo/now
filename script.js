@@ -3,7 +3,7 @@
 // keys
 var airtableApiKey = location.hash.substring(1); //add the apiKey at the end of the url (..index.html#apiKey)
 var airtableBaseKey = "appJiXZgUVkUbDbhY";
-console.log(airtableApiKey);
+console.log("key: " + airtableApiKey);
 
 // base
 var airtableBaseName = "timetable2";
