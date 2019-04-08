@@ -57,10 +57,6 @@ var roundUpMins = true;
 
 ///////////////////
 
-if (airtableApiKey == ""){
-    console.log(msgApiKey);
-}
-
 // refresh rate
 setInterval(update, 1000);
 
@@ -171,6 +167,11 @@ function update(){
     }
 
     footerElem.textContent = "next: " + next;
+
+    if (airtableApiKey == ""){
+        console.log(msgApiKey);
+        footerElem.textContent = msgApiKey;
+    }
 
 }
 
