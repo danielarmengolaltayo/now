@@ -33,15 +33,15 @@ var airtableRecord6Array = [];
 /////////////////// variables
 
 // countdown
-var record1 = document.getElementById("header");
+var headerElem = document.getElementById("header");
 var countdownElem = document.getElementById("countdown");
+var countdownSmallElem = document.getElementById("countdownSmall");
 var footerElem = document.getElementById("footer");
 var footerLElem = document.getElementById("footerL");
 var footerRElem = document.getElementById("footerR");
 
 // other
 var next;
-var record4 = document.getElementById("timetable");
 var timetableLoaded = false;
 var highlightedColor = "#fff";
 var highlightedBackgroundColor = "#f00";
@@ -57,7 +57,7 @@ var roundUpMins = true;
 // error message
 if (airtableApiKey == ""){
     footerElem.textContent = "AIRTABLE_API_KEY is missing (..index.html#apiKey)";
-    record1.textContent = "ERROR";
+    headerElem.textContent = "ERROR";
 }
 
 // refresh rate
@@ -123,7 +123,7 @@ function update(){
     if (SSTillTheEnd < 10) { SSTillTheEnd = "0" + SSTillTheEnd; }
 
     // display countdown
-    record1.textContent = airtableRecord1Array[index];
+    headerElem.textContent = airtableRecord1Array[index];
     var minsHighlighted = airtableRecord6Array[index];
 
     if(devMode){
@@ -131,6 +131,7 @@ function update(){
         // document.getElementById("countdown").style.fontSize = "200px";
         // document.getElementById("dev").style.display = "block";
         countdownElem.textContent = HHTillTheEnd + ":" + MMTillTheEnd + ":" + SSTillTheEnd;
+        countdownSmallElem.textContent = HHTillTheEnd + ":" + MMTillTheEnd + ":" + SSTillTheEnd;
     }else{
         if(hrsTillTheEnd == 0){
             countdownElem.textContent = (minsTillTheEnd);
@@ -173,10 +174,10 @@ function update(){
 
 }
 
-/////////////////// 
+/////////////////// change the color for the text and for the background
 
 function changeColors(c, b){
-    record1.style.color = c;
+    headerElem.style.color = c;
     countdownElem.style.color = c;
     footerElem.style.color = c;
     footerLElem.style.color = c;
@@ -216,7 +217,10 @@ base(airtableBaseName).select({
 
 function timetable(){
     for(var i = 0; i < airtableRecord3Array.length; i++){
-        record4.insertAdjacentHTML('beforeend', "<li>" + airtableRecord3Array[i] + "</li>");
+        document.getElementById("timetable1").insertAdjacentHTML('beforeend', "<li>" + airtableRecord3Array[i] + "</li>");
+    }
+    for(var i = 0; i < airtableRecord1Array.length; i++){
+        document.getElementById("timetable2").insertAdjacentHTML('beforeend', "<li>" + airtableRecord1Array[i] + "</li>");
     }
     timetableLoaded = true;
 }
@@ -225,14 +229,14 @@ document.querySelector("body").addEventListener("click", function(){
     if(devMode){
         document.getElementById("countdown").classList.remove("countdownDevMode");
         document.getElementById("countdown").classList.add("countdown");
+        // document.getElementById("dev").classList.remove("d-flex");
         document.getElementById("dev").classList.add("d-none");
-        document.getElementById("dev").classList.remove("dev");
         document.getElementById("header").classList.remove("d-none");
     }else{
         document.getElementById("countdown").classList.remove("countdown");
         document.getElementById("countdown").classList.add("countdownDevMode");
         document.getElementById("dev").classList.remove("d-none");
-        document.getElementById("dev").classList.add("dev");
+        // document.getElementById("dev").classList.add("d-flex");
         document.getElementById("header").classList.add("d-none");
     }
     devMode = !devMode;
