@@ -70,7 +70,7 @@ var seconds;
 // modes
 var roundUpMins = true;
 
-///////////////////
+/////////////////// logic
 
 // refresh rate
 setInterval(update, 1000);

@@ -1,14 +1,13 @@
 body{
-    /* font-family: 'Roboto Condensed', sans-serif; */
     font-family: 'Roboto Mono', monospace;
     font-weight: 400;
+    font-size: 1em;
 	color: white;
 	/* mssg centered */
 	min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
 	min-height: 100vh; /* These two lines are counted as one :-)       */
 	display: flex;
     align-items: center;
-    font-size: 1em;
 }
 
 .countdown{
@@ -17,7 +16,7 @@ body{
 }
 
 #header, #footer{
-    font-size: 4em;
+    font-size: 3em;
 }
 
 #footer{
