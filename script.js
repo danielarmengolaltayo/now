@@ -2,7 +2,7 @@
 
 // keys
 var airtableApiKey = location.hash.substring(1); //add the apiKey at the end of the url (..index.html#apiKey)
-var airtableBaseKey = "appJiXZgUVkUbDbhY";
+var airtableBaseKey = "apptalZ4kFQ7sTore";
 
 // base
 var airtableBaseName = "timetable2";
@@ -128,8 +128,8 @@ function update(){
 
     if(devMode){
         changeColors("#222","#bbb");
-        document.getElementById("countdown").style.fontSize = "200px";
-        document.getElementById("dev").style.display = "block";
+        // document.getElementById("countdown").style.fontSize = "200px";
+        // document.getElementById("dev").style.display = "block";
         countdownElem.textContent = HHTillTheEnd + ":" + MMTillTheEnd + ":" + SSTillTheEnd;
     }else{
         if(hrsTillTheEnd == 0){
@@ -216,7 +216,24 @@ base(airtableBaseName).select({
 
 function timetable(){
     for(var i = 0; i < airtableRecord3Array.length; i++){
-        record4.insertAdjacentHTML('beforeend', "<ul>" + airtableRecord3Array[i] + "</ul>");
+        record4.insertAdjacentHTML('beforeend', "<li>" + airtableRecord3Array[i] + "</li>");
     }
     timetableLoaded = true;
 }
+
+document.querySelector("body").addEventListener("click", function(){
+    if(devMode){
+        document.getElementById("countdown").classList.remove("countdownDevMode");
+        document.getElementById("countdown").classList.add("countdown");
+        document.getElementById("dev").classList.add("d-none");
+        document.getElementById("dev").classList.remove("dev");
+        document.getElementById("header").classList.remove("d-none");
+    }else{
+        document.getElementById("countdown").classList.remove("countdown");
+        document.getElementById("countdown").classList.add("countdownDevMode");
+        document.getElementById("dev").classList.remove("d-none");
+        document.getElementById("dev").classList.add("dev");
+        document.getElementById("header").classList.add("d-none");
+    }
+    devMode = !devMode;
+});
