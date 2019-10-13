@@ -13,19 +13,13 @@ body{
 
 .countdown{
     font-weight: 700;
-    font-size: 30em;
+    font-size: 20em;
 }
 
-.countdownDevMode{
-    font-weight: 700;
-    font-size: 10em;
-}
-
-.dev{
-    font-size: 0.8em;
-    /* background: rgba(0,0,0,0.5); */
-}
-
-#header{
+#header, #footer{
     font-size: 4em;
+}
+
+#footer{
+    color: rgba(255, 255, 255, 0.15);
 }
