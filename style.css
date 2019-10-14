@@ -12,13 +12,15 @@ body{
 
 .countdown{
     font-weight: 700;
-    font-size: 20em;
+    font-size: 25em;
+    line-height: 1em;
+
 }
 
 #header, #footer{
-    font-size: 3em;
+    font-size: 4em;
 }
 
 #footer{
-    color: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.25);
 }
