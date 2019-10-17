@@ -24,7 +24,7 @@ body{
 
 .countdown{
     font-weight: 400;
-    font-size: 30em;
+    font-size: 25em;
     /* ASM */
     letter-spacing: -0.05em;
     line-height: 0.5em;
@@ -32,6 +32,7 @@ body{
 }
 
 #header, #footer{
+    margin: 20px 0;
     font-size: 3.2em;
     text-transform: uppercase;
     /* ASM */
