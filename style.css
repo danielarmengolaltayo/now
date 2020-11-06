@@ -10,19 +10,21 @@
     src: url(ASM-Bold.otf) format("opentype");
 }
 
-body{
+body {
     font-family: "ASM", "Roboto Condensed", sans-serif;
     font-weight: 700;
     font-size: 1em;
-	color: white;
-	/* mssg centered */
-	min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-	min-height: 100vh; /* These two lines are counted as one :-)       */
-	display: flex;
+    color: white;
+    /* mssg centered */
+    min-height: 100%;
+    /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh;
+    /* These two lines are counted as one :-)       */
+    display: flex;
     align-items: center;
 }
 
-.countdown{
+.countdown {
     font-weight: 400;
     font-size: 25em;
     /* ASM */
@@ -31,7 +33,8 @@ body{
     padding-top: 0.2em;
 }
 
-#header, #footer{
+#header,
+#footer {
     margin: 30px 0;
     font-size: 3.2em;
     text-transform: uppercase;
@@ -40,6 +43,8 @@ body{
     padding-top: 0.2em;
 }
 
-#footer{
-    color: rgba(255, 255, 255, 0.25);
+#footer {
+    /* color: rgba(255, 255, 255, 0.25); */
+    /* opacity: 0.25; */
+    color: rgb(255, 0, 0);
 }
