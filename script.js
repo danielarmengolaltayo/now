@@ -133,7 +133,8 @@ function displayCountdown(i) {
     if (hours == 0) {
         // check if lastMinuteMode is ON
         if (minutes == 1 && lastMinuteMode) {
-            countdownElem.textContent = seconds;
+            // +1 is for counting from 60 to 1 instead of from 59 to 0
+            countdownElem.textContent = seconds + 1;
         } else {
             countdownElem.textContent = minutes;
         }
@@ -162,5 +163,6 @@ function twoDigits(n) {
 // change the color for the text and for the background
 function changeColors(c, b) {
     document.body.style.color = c;
-    document.body.style.background = b;
+    // document.body.style.background = b;
+    document.body.style.background = "brown";
 }
