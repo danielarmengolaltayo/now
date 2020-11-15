@@ -68,7 +68,7 @@ var minutes;
 var seconds;
 
 // modes
-var roundUpMins = true;
+var roundUpMins = false;
 
 /////////////////// logic
 
@@ -100,8 +100,6 @@ function calculateCountdown() {
         var i = 0;
         // then, calculate the total amount of seconds taking into account the remaining time from the last record
         secondsToEndToDoNow = (secondsDay - secondsNow) + secondsToEndToDos[i];
-        // test
-        if (roundUpMins) { secondsToEndToDoNow = secondsToEndToDoNow + 60; }
     } else {
         // search for the record according to the present moment
         for (var j = 0; j < secondsToEndToDos.length; j++) {
@@ -112,9 +110,10 @@ function calculateCountdown() {
         }
         // calculate the total amount of seconds remaining till the end of the record
         secondsToEndToDoNow = secondsToEndToDos[i] - secondsNow;
-        // test
-        if (roundUpMins) { secondsToEndToDoNow = secondsToEndToDoNow + 60; }
     }
+
+    // test
+    if (roundUpMins) { secondsToEndToDoNow = secondsToEndToDoNow + 60; }
 
     // calculate countdown
     hours = parseInt(secondsToEndToDoNow / 3600);
@@ -133,7 +132,12 @@ function displayCountdown(i) {
     var minsHighlighted = aRecord6Arr[i];
 
     if (hours == 0) {
-        countdownElem.textContent = (minutes);
+        if (minutes == 0) {
+            countdownElem.textContent = seconds;
+        } else {
+            countdownElem.textContent = minutes;
+        }
+
         if ((minutes) <= minsHighlighted) {
             changeColors(highlightedColor, highlightedBackgroundColor);
         } else {
@@ -160,5 +164,5 @@ function twoDigits(n) {
 function changeColors(c, b) {
     document.body.style.color = c;
     //document.body.style.background = b;
-    document.body.style.background = "salmon";
+    document.body.style.background = "grey";
 }
