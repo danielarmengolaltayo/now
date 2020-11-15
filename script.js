@@ -68,7 +68,7 @@ var minutes;
 var seconds;
 
 // modes
-var roundUpMins = true;
+var roundUpMins = false;
 
 /////////////////// logic
 
