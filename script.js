@@ -68,7 +68,7 @@ var minutes;
 var seconds;
 
 // modes
-var roundUpMins = true;
+var lastMinuteMode = false;
 
 /////////////////// logic
 
@@ -112,16 +112,13 @@ function calculateCountdown() {
         secondsToEndToDoNow = secondsToEndToDos[i] - secondsNow;
     }
 
-    // test
-    if (roundUpMins) { secondsToEndToDoNow = secondsToEndToDoNow + 60; }
+    // check if lastMinuteMode is ON
+    if (lastMinuteMode) { secondsToEndToDoNow = secondsToEndToDoNow + 60; }
 
     // calculate countdown
     hours = parseInt(secondsToEndToDoNow / 3600);
     minutes = parseInt((secondsToEndToDoNow % 3600) / 60);
     seconds = (secondsToEndToDoNow % 3600) % 60;
-
-    // round up the minutes DOUBLE CHECK THIS
-    //if (roundUpMins) { minutes = minutes + 1; }
 
     return i;
 
@@ -132,12 +129,12 @@ function displayCountdown(i) {
     var minsHighlighted = aRecord6Arr[i];
 
     if (hours == 0) {
-        if (minutes == 1 && roundUpMins) {
+        // check if lastMinuteMode is ON
+        if (minutes == 1 && lastMinuteMode) {
             countdownElem.textContent = seconds;
         } else {
             countdownElem.textContent = minutes;
         }
-
         if ((minutes) <= minsHighlighted) {
             changeColors(highlightedColor, highlightedBackgroundColor);
         } else {
@@ -163,6 +160,6 @@ function twoDigits(n) {
 // change the color for the text and for the background
 function changeColors(c, b) {
     document.body.style.color = c;
-    //document.body.style.background = b;
-    document.body.style.background = "gray";
+    // document.body.style.background = b;
+    document.body.style.background = "white";
 }
