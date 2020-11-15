@@ -68,7 +68,7 @@ var minutes;
 var seconds;
 
 // modes
-var roundUpMins = false;
+var roundUpMins = true;
 
 /////////////////// logic
 
@@ -100,6 +100,8 @@ function calculateCountdown() {
         var i = 0;
         // then, calculate the total amount of seconds taking into account the remaining time from the last record
         secondsToEndToDoNow = (secondsDay - secondsNow) + secondsToEndToDos[i];
+        // test
+        if (roundUpMins) { secondsToEndToDoNow = secondsToEndToDoNow + 60; }
     } else {
         // search for the record according to the present moment
         for (var j = 0; j < secondsToEndToDos.length; j++) {
@@ -118,7 +120,7 @@ function calculateCountdown() {
     seconds = (secondsToEndToDoNow % 3600) % 60;
 
     // round up the minutes DOUBLE CHECK THIS
-    if (roundUpMins) { minutes = minutes + 1; }
+    //if (roundUpMins) { minutes = minutes + 1; }
 
     return i;
 
