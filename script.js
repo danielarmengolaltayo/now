@@ -68,7 +68,7 @@ var minutes;
 var seconds;
 
 // modes
-var lastMinuteMode = false;
+var lastMinuteMode = true;
 
 /////////////////// logic
 
@@ -113,6 +113,8 @@ function calculateCountdown() {
     }
 
     // the calculation that is finally rendered makes more sense if we add 60 seconds
+    // for example, next change is at 12:00, now we are at 11:55 and time left is 4 minutes and some seconds
+    // if we don't see the seconds the calculation makes more sense if it is 5 minutes left instead of 4
     secondsToEndToDoNow = secondsToEndToDoNow + 60;
 
     // calculate countdown
@@ -160,6 +162,5 @@ function twoDigits(n) {
 // change the color for the text and for the background
 function changeColors(c, b) {
     document.body.style.color = c;
-    // document.body.style.background = b;
-    document.body.style.background = "gold";
+    document.body.style.background = b;
 }
