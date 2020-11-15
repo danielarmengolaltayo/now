@@ -112,6 +112,8 @@ function calculateCountdown() {
         }
         // calculate the total amount of seconds remaining till the end of the record
         secondsToEndToDoNow = secondsToEndToDos[i] - secondsNow;
+        // test
+        if (roundUpMins) { secondsToEndToDoNow = secondsToEndToDoNow + 60; }
     }
 
     // calculate countdown
@@ -158,5 +160,5 @@ function twoDigits(n) {
 function changeColors(c, b) {
     document.body.style.color = c;
     //document.body.style.background = b;
-    document.body.style.background = "green";
+    document.body.style.background = "salmon";
 }
