@@ -112,8 +112,8 @@ function calculateCountdown() {
         secondsToEndToDoNow = secondsToEndToDos[i] - secondsNow;
     }
 
-    // check if lastMinuteMode is ON
-    if (lastMinuteMode) { secondsToEndToDoNow = secondsToEndToDoNow + 60; }
+    // the calculation that is finally rendered makes more sense if we add 60 seconds
+    secondsToEndToDoNow = secondsToEndToDoNow + 60;
 
     // calculate countdown
     hours = parseInt(secondsToEndToDoNow / 3600);
@@ -161,5 +161,5 @@ function twoDigits(n) {
 function changeColors(c, b) {
     document.body.style.color = c;
     // document.body.style.background = b;
-    document.body.style.background = "gray";
+    document.body.style.background = "gold";
 }
