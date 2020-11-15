@@ -68,7 +68,7 @@ var minutes;
 var seconds;
 
 // modes
-var roundUpMins = false;
+var roundUpMins = true;
 
 /////////////////// logic
 
@@ -132,7 +132,7 @@ function displayCountdown(i) {
     var minsHighlighted = aRecord6Arr[i];
 
     if (hours == 0) {
-        if (minutes == 0) {
+        if (minutes == 0 && roundUpMins) {
             countdownElem.textContent = seconds;
         } else {
             countdownElem.textContent = minutes;
@@ -164,5 +164,5 @@ function twoDigits(n) {
 function changeColors(c, b) {
     document.body.style.color = c;
     //document.body.style.background = b;
-    document.body.style.background = "grey";
+    document.body.style.background = "pink";
 }
