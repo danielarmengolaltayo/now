@@ -157,5 +157,6 @@ function twoDigits(n) {
 // change the color for the text and for the background
 function changeColors(c, b) {
     document.body.style.color = c;
-    document.body.style.background = b;
+    //document.body.style.background = b;
+    document.body.style.background = "green";
 }
