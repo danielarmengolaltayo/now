@@ -24,12 +24,12 @@ var aRecord6Arr = [];
 
 // retrieving data from airtable
 var Airtable = require('airtable');
-var base = new Airtable({apiKey: airtableApiKey}).base(airtableBaseKey);
+var base = new Airtable({ apiKey: airtableApiKey }).base(airtableBaseKey);
 
 base(airtableBaseName).select({
     view: airtableViewName
 }).eachPage(function page(records) {
-    records.forEach(function(record) {
+    records.forEach(function (record) {
         toDo = record.get("action");
         toDos.push(toDo);
         secondsToEndToDo = record.get("secs in total end");
@@ -47,7 +47,7 @@ base(airtableBaseName).select({
 });
 
 // error message
-if (airtableApiKey == ""){
+if (airtableApiKey == "") {
     headerElem.textContent = "ERROR";
     footerElem.textContent = "AIRTABLE_API_KEY is missing (..index.html#apiKey)";
 }
@@ -75,11 +75,11 @@ var roundUpMins = true;
 // refresh rate
 setInterval(update, 1000);
 
-function update(){
+function update() {
     displayCountdown(calculateCountdown());
 }
 
-function calculateCountdown(){
+function calculateCountdown() {
     // get date and time
     var now = new Date();
 
@@ -95,15 +95,15 @@ function calculateCountdown(){
     // (assuming that secondsToEndToDo is sorted ascendingly)
     var secondsToEndToDoNow;
     // if the present moment is bigger than the last record
-    if(secondsNow > secondsToEndToDos[secondsToEndToDos.length - 1]){
+    if (secondsNow > secondsToEndToDos[secondsToEndToDos.length - 1]) {
         // it means that we are in the first record
         var i = 0;
         // then, calculate the total amount of seconds taking into account the remaining time from the last record
         secondsToEndToDoNow = (secondsDay - secondsNow) + secondsToEndToDos[i];
-    }else{
+    } else {
         // search for the record according to the present moment
-        for(var j = 0; j < secondsToEndToDos.length; j++){
-            if(secondsNow <= secondsToEndToDos[j]){
+        for (var j = 0; j < secondsToEndToDos.length; j++) {
+            if (secondsNow <= secondsToEndToDos[j]) {
                 i = j;
                 break;
             }
@@ -118,42 +118,42 @@ function calculateCountdown(){
     seconds = (secondsToEndToDoNow % 3600) % 60;
 
     // round up the minutes DOUBLE CHECK THIS
-    if(roundUpMins){ minutes = minutes + 1; }
+    if (roundUpMins) { minutes = minutes + 1; }
 
     return i;
 
 }
 
-function displayCountdown(i){
+function displayCountdown(i) {
     headerElem.textContent = toDos[i];
     var minsHighlighted = aRecord6Arr[i];
 
-    if(hours == 0){
+    if (hours == 0) {
         countdownElem.textContent = (minutes);
-        if((minutes) <= minsHighlighted){
-            changeColors(highlightedColor,highlightedBackgroundColor);
-        }else{
-            changeColors(colors[i],bgColors[i]);
+        if ((minutes) <= minsHighlighted) {
+            changeColors(highlightedColor, highlightedBackgroundColor);
+        } else {
+            changeColors(colors[i], bgColors[i]);
         }
-    }else{
-        changeColors(colors[i],bgColors[i]);
+    } else {
+        changeColors(colors[i], bgColors[i]);
         countdownElem.textContent = hours + ":" + twoDigits(minutes);
     }
 
-    if(i < toDos.length - 1){
+    if (i < toDos.length - 1) {
         footerElem.textContent = toDos[i + 1];
-    }else{
+    } else {
         footerElem.textContent = toDos[0];
     }
 }
 
 // check format countdown
-function twoDigits(n){
+function twoDigits(n) {
     if (n < 10) { return "0" + n; } else { return n; }
 }
 
 // change the color for the text and for the background
-function changeColors(c, b){
+function changeColors(c, b) {
     document.body.style.color = c;
     document.body.style.background = b;
 }
