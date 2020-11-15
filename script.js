@@ -161,5 +161,5 @@ function twoDigits(n) {
 function changeColors(c, b) {
     document.body.style.color = c;
     // document.body.style.background = b;
-    document.body.style.background = "white";
+    document.body.style.background = "gray";
 }
